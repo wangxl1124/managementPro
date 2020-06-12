@@ -174,12 +174,7 @@ export default {
       this.imageUrl = res.data.accountInfo.imgUrl;
       
     });
-    /* let id = localStorage.id
-    API_MYCENTER(id).then( (res)=>{
-     
-      console.log(res)
-      
-    }) */
+    
   },
   computed: {
     //设置登录权限，访问到不同菜单
