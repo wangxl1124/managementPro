@@ -74,7 +74,7 @@ const router = new VueRouter({
                 path: '/index/changepwd',
                 name: 'changepwd',
                 component: () => import('../pages/accout/ChangePwd'),
-                meta: { name: ['账号管理', '修改密码'], role: ['super', 'normal'] }
+                meta: { name: ['账号管理', '修改密码'], role: ['super'] }
 
             },
             //销售统计
@@ -108,16 +108,19 @@ const router = new VueRouter({
 
 //路由守卫
 router.beforeEach((to, from, next) => {
-
+    //to 将要访问的路径
+    //from 代表从哪个路径跳转而来
+    //next 是一个函数，表示放行
+    //next()  放行  next('/') 强制跳转
     if (to.path != '/') {
 
         API_TOKEN(localStorage.token).then((res) => {
             if (res.data.code == 0) {
                 //还在登录状态
-                
-                if (to.meta.role.includes(localStorage.role)){
+
+                if (to.meta.role.includes(localStorage.role)) {
                     next()
-                } else{
+                } else {
                     next(from.path)
                 }
             } else {

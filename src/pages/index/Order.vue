@@ -1,18 +1,18 @@
 <template>
   <div class="order_div">
     <div class="query_div">
-      <el-form :inline="true" :model="form" class="demo-form-inline">
+      <el-form :inline="true" :model="formInline" class="demo-form-inline">
         <el-form-item label="订单号">
-          <el-input v-model="form.orderNo"></el-input>
+          <el-input v-model="formInline.orderNo"></el-input>
         </el-form-item>
         <el-form-item label="收货人">
-          <el-input v-model="form.consignee"></el-input>
+          <el-input v-model="formInline.consignee"></el-input>
         </el-form-item>
         <el-form-item label="手机号">
-          <el-input v-model="form.phone"></el-input>
+          <el-input v-model="formInline.phone"></el-input>
         </el-form-item>
         <el-form-item label="订单状态">
-          <el-select placeholder="订单状态" v-model="form.orderState">
+          <el-select placeholder="订单状态" v-model="formInline.orderState">
             <el-option label="已受理" value="已受理"></el-option>
             <el-option label="派送中" value="派送中"></el-option>
             <el-option label="已完成" value="已完成"></el-option>
@@ -33,7 +33,7 @@
       </el-form>
     </div>
 
-    <div>
+    <div id="box">
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column fixed prop="orderNo" label="订单号"></el-table-column>
         <el-table-column prop="orderTime" label="下单时间"></el-table-column>
@@ -145,8 +145,8 @@ export default {
     return {
       total: 0,
       currentPage: 1,
-      pagesizes: [10, 20, 30, 40],
-      pagesize: 10,
+      pagesizes: [5, 20, 30, 40],
+      pagesize: 5,
       page: 1,
       num_input: "",
       value1: "",
@@ -154,10 +154,12 @@ export default {
       disabled: true,
       disabled2: true,
       value: "",
+      form:{},
       //查看
       id: "",
       dialogFormVisible: false,
-      form: {
+     
+      formInline: {
         orderNo: "",
         consignee: "",
         phone: "",
@@ -253,12 +255,12 @@ export default {
        }
       
       API_ORDER_LIST(
-        this.page,
+        1,
         this.pagesize,
-        this.form.orderNo,
-        this.form.consignee,
-        this.form.phone,
-        this.form.orderState,
+        this.formInline.orderNo,
+        this.formInline.consignee,
+        this.formInline.phone,
+        this.formInline.orderState,
         JSON.stringify(this.value)
       ).then(res => {
         for (let e of res.data.data) {
@@ -285,11 +287,13 @@ export default {
     handleSizeChange(val) {
       this.pagesize = val;
       this.getorder();
+      this.clicksearch()
       //console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
-      this.page = val;
+      this.page = val;      
       this.getorder();
+      this.clicksearch()
       //console.log(`当前页: ${val}`);
     },
 

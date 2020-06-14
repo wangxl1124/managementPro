@@ -40,8 +40,8 @@ export default {
   methods: {
     //点击确认，获取原密码
     clickalter() {
-      let id = sessionStorage.getItem("id");
-      let oldPwd = sessionStorage.getItem("pwd");
+      let id = localStorage.getItem("id");
+      let oldPwd = localStorage.getItem("pwd");
       //console.log(this.pwd!=oldPwd)
       // console.log(this.pwd.length)
       //console.log(id,oldPwd)

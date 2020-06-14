@@ -127,12 +127,12 @@ export default {
       return isJPG && isLt2M;
     },
 
-    //店铺图片
-    handleAvatarSuccess2(res) {
+    //店铺图片   
+    handleAvatarSuccess2(res) {//上传成功
       this.pics.push(res.imgUrl)
     },
     handleRemove( fileList) {
-      
+      //删除图片
       for(let i in this.form.pics){
         if(this.form.pics[i]===fileList.name){
           this.form.pics.splice(i,1)

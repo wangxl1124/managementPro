@@ -155,6 +155,7 @@ export default {
     }
   },
   created() {
+    //console.log(this.role)
     //this.imageUrl = localStorage.imageUrl;
     //发送token请求
     API_TOKEN(localStorage.token).then(res => {
@@ -178,12 +179,12 @@ export default {
   },
   computed: {
     //设置登录权限，访问到不同菜单
+    
     newtreelist() {
       var newarr = this.treelist.filter(i => {
         return i.role.includes(this.role);
       });
       return newarr;
-      //return this.treelist.filter( i => i.role.includes(this.role))
     }
   }
   /*  methods: {

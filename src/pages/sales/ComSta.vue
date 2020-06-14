@@ -34,7 +34,7 @@ export default {
     setTimeout(() => {
       let option = {
         title: {
-          text: "堆叠区域图"
+          text: "商品统计"
         },
         tooltip: {
           trigger: "axis",
